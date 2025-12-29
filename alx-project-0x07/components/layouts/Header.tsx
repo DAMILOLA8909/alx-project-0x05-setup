@@ -1,5 +1,4 @@
-"use client";
-
+// components/layouts/Header.tsx
 import Link from 'next/link';
 
 const Header: React.FC = () => {

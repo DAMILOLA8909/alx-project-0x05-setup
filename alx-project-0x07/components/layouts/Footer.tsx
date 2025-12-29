@@ -1,5 +1,4 @@
-"use client";
-
+// components/layouts/Footer.tsx
 import Link from "next/link";
 
 const Footer: React.FC = () => {

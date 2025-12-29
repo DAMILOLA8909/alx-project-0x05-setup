@@ -1,12 +1,9 @@
-"use client";
-
+// pages/index.tsx
 import React, { useState } from "react";
 
 const Home: React.FC = () => {
-  const [prompt, setPrompt] = useState<string>("");
-  
   const handleGenerateImage = async () => {
-    console.log("Generating Images for prompt:", prompt);
+    console.log("Generating Images")
   };
 
   return (
@@ -22,8 +19,6 @@ const Home: React.FC = () => {
             type="text"
             placeholder="Enter your prompt here..."
             className="w-full p-3 border border-gray-300 rounded-lg mb-4"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
           />
           <button
             onClick={handleGenerateImage}

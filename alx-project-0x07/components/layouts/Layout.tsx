@@ -1,8 +1,7 @@
-"use client";
-
+// components/layouts/Layout.tsx
 import { ReactComponentProps } from "@/interfaces";
-import Footer from "./Footer";
-import Header from "./Header";
+import Footer from "./Footer"
+import Header from "./Header"
 
 const Layout: React.FC<ReactComponentProps> = ({ children }) => {
   return (
@@ -13,7 +12,7 @@ const Layout: React.FC<ReactComponentProps> = ({ children }) => {
       </main>
       <Footer />
     </>
-  );
-};
+  )
+}
 
 export default Layout;

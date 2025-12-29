@@ -1,3 +1,4 @@
+// interfaces/index.ts
 import * as React from "react"
 
 export interface ReactComponentProps {
