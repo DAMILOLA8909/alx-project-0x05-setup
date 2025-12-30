@@ -1,21 +1,48 @@
 // pages/index.tsx
 import ImageCard from "@/components/common/ImageCard";
-import { ImageProps } from "@/interfaces";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const Home: React.FC = () => {
   const [prompt, setPrompt] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
-  const [generatedImages, setGeneratedImages] = useState<ImageProps[]>(
-    []
-  );
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
+  // Update this part in pages/index.tsx
+const handleGenerateImage = async () => {
+  if (!prompt.trim()) {
+    alert("Please enter a prompt!");
+    return;
+  }
+  
+  setIsLoading(true);
+  
+  try {
+    const resp = await fetch('/api/generate-image', {
+      method: 'POST',
+      body: JSON.stringify({ prompt }),
+      headers: { 'Content-type': 'application/json' }
+    });
 
-  const handleGenerateImage = async () => {
-    console.log("Generating Image")
-    console.log(process.env.NEXT_PUBLIC_GPT_API_KEY)
-  };
+    if (!resp.ok) {
+      throw new Error('API request failed');
+    }
+
+    const data = await resp.json();
+    
+    // Set the image URL from the API response
+    if (data.message) {
+      setImageUrl(data.message);
+    } else {
+      throw new Error('No image URL in response');
+    }
+    
+  } catch (error) {
+    console.error("Error generating image:", error);
+    alert("Failed to generate image. Check console for details.");
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">
@@ -37,10 +64,9 @@ const Home: React.FC = () => {
             onClick={handleGenerateImage}
             className="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
           >
-            {/* {
+            {
               isLoading ? "Loading..." : "Generate Image"
-            } */}
-            Generate Image
+            }
           </button>
         </div>
 
